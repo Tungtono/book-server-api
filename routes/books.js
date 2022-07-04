@@ -37,7 +37,7 @@ const getAllBooks = (req, res) => {
 
 //delete book by id
 const deletePostById = (req, res) => {
-    Book.remove({ id: req.params.id})
+    Book.deleteOne({ id: req.params.id})
     .then((result) => {
         res.send(result)
     })
