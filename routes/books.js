@@ -35,6 +35,18 @@ const getAllBooks = (req, res) => {
     })
 };
 
+//search by title
+const getBookByKeyword = (req, res) => {
+    Book.find( { title: { "$regex": req.params.key, "$options": "i" }} )
+    .then((result) => {
+        res.send(result)
+        // res.send(req.params)
+    })
+    .catch((err) => {
+        res.send(err)
+    })
+}
+
 //delete book by id
 const deletePostById = (req, res) => {
     Book.deleteOne({ id: req.params.id})
@@ -67,6 +79,8 @@ router.post('/', addNewBook);
 router.delete('/:id', deletePostById)
 
 router.patch('/:id', updateBookById)
+
+router.get('/search/:key', getBookByKeyword)
 
 export default router;
 
