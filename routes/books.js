@@ -40,7 +40,6 @@ const getBookByKeyword = (req, res) => {
     Book.find( { title: { "$regex": req.params.key, "$options": "i" }} )
     .then((result) => {
         res.send(result)
-        // res.send(req.params)
     })
     .catch((err) => {
         res.send(err)
